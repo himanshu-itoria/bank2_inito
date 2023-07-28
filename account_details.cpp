@@ -1,9 +1,12 @@
-#include <ctime>
+
 #include <iostream>
 #include <string>
 #include <vector>
 
-#include "transactions.cpp"
+// #include "account_type.cpp"
+#include "loan_type.cpp"
+#include "timestamps.cpp"
+// #include "transactions.cpp"
 
 using namespace std;
 
@@ -23,10 +26,20 @@ class Account_details {
     bool Savings;
     bool Current;
     bool Loan;
+    string card_no;
+    string cvv;
+    string expiry_date;
+    string date_of_opening;
 
    public:
     string generate_ac_no() {
         return generate_string(12);
+    }
+    string generate_atm_id() {
+        return generate_string(16);
+    }
+    string generate_atm_cvv() {
+        return generate_string(3);
     }
 
     void open_account(int i) {
@@ -48,9 +61,13 @@ class Account_details {
                 cout << "not enough amount, enter the amount again " << endl;
                 goto line1;
             }
+
+        line10:
             cout << "Deposit NRV " << endl;
+
             float it;
             cin >> it;
+
             nrv_value = it;
         } else if (i == 2) {
         line0:
@@ -76,14 +93,34 @@ class Account_details {
             cin >> it;
             nrv_value = it;
         }
+        cout << endl
+             << "Need an atm card?" << endl
+             << "1. Yes             2. No " << endl;
+        ;
+        int choice;
+        cin >> choice;
+        if (choice == 1) {
+            string atm_id = generate_atm_id();
+            string atm_cvv = generate_atm_cvv();
+            cout << "ATM card no. : " << atm_id << endl
+                 << "CVV : " << atm_cvv << endl;
+
+        } else {
+            cout << "No atm card required" << endl;
+        }
+        date_of_opening = getCurrentDate();
+        cout << endl
+             << endl
+             << "Account opened @ : " << date_of_opening << endl;
     }
 };
 
-class atm : public Account_details {
-   public:
-    string card_no;
-    int cvv;
-    string expiry_date;
-};
+// class Atm {
+//    public:
+//     string card_no;
+//     int cvv;
+//     string expiry_date;
 
-unordered_map<string, Account_details> account_records;
+// };
+
+// unordered_map<string, Transactions> account_records;
