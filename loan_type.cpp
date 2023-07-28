@@ -66,18 +66,24 @@ class LoanGrant {
                 cout << "Insufficient funds, put some balance " << endl;
                 float amt;
                 cin >> amt;
-                deposit(amt);
+                deposit();
             }
         }
     }
-    void deposit(float amt) {
-        bal += amt;
+    void deposit() {
+        float amount;
+        cout << "enter amount" << endl;
+        cin >> amount;
+        bal += amount;
     }
     void open_loan_account(string abc) {
         loan_ac_no = abc;
         float dc;
         cin >> dc;
         bal = dc;
+        // loat balance;
+
+        deposit();
         select_loan(bal);
     }
 };
